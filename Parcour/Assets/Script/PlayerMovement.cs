@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class PlayerMovement : MonoBehaviour
 {
@@ -17,7 +18,6 @@ public class PlayerMovement : MonoBehaviour
     bool moonjump;
     bool moonjump2;
     Vector3 moveDir;
-
 
     private void Awake()
     {
@@ -51,7 +51,6 @@ public class PlayerMovement : MonoBehaviour
             if (Input.GetKeyDown(KeyCode.E))
             {
                 moonjump2 = true;
-
             }
 
         }
@@ -63,6 +62,12 @@ public class PlayerMovement : MonoBehaviour
         if (Input.GetKeyUp(KeyCode.E))
         {
             rigidbody.AddForce(0, -400, 0);
+        }
+
+        if (Input.GetKey(KeyCode.Escape))
+        {
+            SceneManager.LoadScene("MainMenu");
+            Cursor.lockState = CursorLockMode.None;
         }
     }
 
@@ -83,19 +88,14 @@ public class PlayerMovement : MonoBehaviour
         float vert = Input.GetAxis("Vertical");
         float hor = Input.GetAxis("Horizontal");
         
-
         moveDir = vert * transform.forward + hor * transform.right;
         Debug.Log(playerScale) ;
        
-       
-        
         if (Input.GetKeyDown(KeyCode.Space) && isGrounded)
         {
-
             rigidbody.AddForce(jump * jumpForce * playerScale, ForceMode.Force);
             isGrounded = false;
         }
-
         if (Input.GetKey(KeyCode.LeftShift))
         {
             moveSpeed = 10;
@@ -118,32 +118,24 @@ public class PlayerMovement : MonoBehaviour
                 isGrounded = false;
                 moonjump2 = false;
             }
-
         }
         else
         {
             Physics.gravity = new Vector3(Physics.gravity.x, -13f, Physics.gravity.z)* playerScale;
             moonjump = false;
         }
-
-        
     }
 
     private void Resize()
     {
-
         if (isBig == true && playerScale < 1)
         {
             playerScale += (1f*Time.deltaTime);
-
-            
         }
         if (isBig == false && playerScale > 0.4)
         {
             playerScale -= (1f * Time.deltaTime);
-
         }
         transform.localScale = new Vector3(playerScale, playerScale, playerScale);
-
     }
 }

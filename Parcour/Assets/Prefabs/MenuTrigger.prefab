@@ -28,7 +28,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1969171668520127865}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 24.64, y: -26.330276, z: 776.14996}
   m_LocalScale: {x: 4.3845897, y: 10.330182, z: 13.044224}
   m_Children: []
@@ -111,7 +111,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 1969171668520127859}
-        m_MethodName: LoadScenes
+        m_MethodName: LoadThisScenes
         m_Mode: 5
         m_Arguments:
           m_ObjectArgument: {fileID: 0}

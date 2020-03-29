@@ -8,16 +8,8 @@ public class CameraController : MonoBehaviour
     float angleY;
     public float sensY;
     public float sensX;
-
     public Transform body;
 
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
     void Update()
     {
         float mouseX = Input.GetAxis("Mouse X");

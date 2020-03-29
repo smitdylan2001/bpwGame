@@ -5,11 +5,9 @@ using UnityEngine.SceneManagement;
 
 public class LoadScene : MonoBehaviour
 {
-    public void LoadScenes(string level)
+    public void LoadThisScenes(string level)
     {
-    
-
-            SceneManager.LoadScene(level);
+        SceneManager.LoadScene(level);
         Cursor.lockState = CursorLockMode.None;
     }
 
