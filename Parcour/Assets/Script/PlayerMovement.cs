@@ -18,6 +18,7 @@ public class PlayerMovement : MonoBehaviour
     bool moonjump;
     bool moonjump2;
     Vector3 moveDir;
+    bool justJumped;
 
     private void Awake()
     {
@@ -29,6 +30,7 @@ public class PlayerMovement : MonoBehaviour
     void Start()
     {
         isBig = true;
+        justJumped = false;
         transform.localScale = new Vector3(1f, 1f, 1f);
         jump = new Vector3(0.0f, 2.0f, 0.0f);
         Cursor.lockState = CursorLockMode.Locked;
@@ -81,6 +83,7 @@ public class PlayerMovement : MonoBehaviour
     void OnCollisionEnter()
     {
         isGrounded = true;
+        justJumped = false;
     }
 
     private void Movement()
@@ -95,6 +98,7 @@ public class PlayerMovement : MonoBehaviour
         {
             rigidbody.AddForce(jump * jumpForce * playerScale, ForceMode.Force);
             isGrounded = false;
+            justJumped = true;
         }
         if (Input.GetKey(KeyCode.LeftShift))
         {
@@ -109,7 +113,7 @@ public class PlayerMovement : MonoBehaviour
 
     private void CheckMoonJump()
     {
-        if (moonjump)
+        if (moonjump && !justJumped)
         {
             Physics.gravity = new Vector3(Physics.gravity.x, -3, Physics.gravity.z);
             if (moonjump2)
