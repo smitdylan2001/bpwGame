@@ -14,6 +14,9 @@ public class PlayerMovement : MonoBehaviour
     Vector3 temp;
     public Vector3 jump;
     public float jumpForce = 2.0f;
+    bool moonjump;
+    bool moonjump2;
+    Vector3 moveDir;
 
 
     private void Awake()
@@ -35,17 +38,40 @@ public class PlayerMovement : MonoBehaviour
     void Update()
     {
         Movement();
-        CheckMoonJump();
+        
         if (Input.GetKeyDown(KeyCode.F))
         {
             isBig = !isBig;
+        }
+        Resize();
+
+        if (Input.GetKey(KeyCode.E))
+        {
+            moonjump = true;
+            if (Input.GetKeyDown(KeyCode.E))
+            {
+                moonjump2 = true;
+
+            }
+
+        }
+        else
+        {
+            moonjump = false;
+        }
+
+        if (Input.GetKeyUp(KeyCode.E))
+        {
+            rigidbody.AddForce(0, -400, 0);
         }
     }
 
     private void FixedUpdate()
     {
-        Resize();
+        CheckMoonJump();
+        rigidbody.MovePosition(transform.position + moveDir.normalized * moveSpeed *Time.fixedDeltaTime * playerScale);
     }
+
 
     void OnCollisionEnter()
     {
@@ -58,17 +84,11 @@ public class PlayerMovement : MonoBehaviour
         float hor = Input.GetAxis("Horizontal");
         
 
-        Vector3 moveDir = vert * transform.forward + hor * transform.right;
-        if (isGrounded == true)
-        {
-            rigidbody.MovePosition(transform.position + moveDir.normalized * moveSpeed * Time.deltaTime * playerScale);
-        }
-        else
-        {
-            Vector3 temp = rigidbody.velocity;
-            rigidbody.MovePosition(transform.position + moveDir.normalized * moveSpeed * Time.deltaTime * playerScale);
-        }
-
+        moveDir = vert * transform.forward + hor * transform.right;
+        Debug.Log(playerScale) ;
+       
+       
+        
         if (Input.GetKeyDown(KeyCode.Space) && isGrounded)
         {
 
@@ -78,37 +98,35 @@ public class PlayerMovement : MonoBehaviour
 
         if (Input.GetKey(KeyCode.LeftShift))
         {
-            moveSpeed = 20;
+            moveSpeed = 10;
         }
         else 
         {
-            moveSpeed = 10;
+            moveSpeed = 6;
         }
 
     }
 
     private void CheckMoonJump()
     {
-        if (Input.GetKey(KeyCode.E))
+        if (moonjump)
         {
             Physics.gravity = new Vector3(Physics.gravity.x, -3, Physics.gravity.z);
-            if (Input.GetKeyDown(KeyCode.E))
+            if (moonjump2)
             {
                 rigidbody.AddForce(0, 300, 0);
                 isGrounded = false;
-
+                moonjump2 = false;
             }
 
         }
         else
         {
             Physics.gravity = new Vector3(Physics.gravity.x, -13f, Physics.gravity.z)* playerScale;
+            moonjump = false;
         }
 
-        if (Input.GetKeyUp(KeyCode.E))
-        {
-            rigidbody.AddForce(0, -400, 0);
-        }
+        
     }
 
     private void Resize()
@@ -116,13 +134,13 @@ public class PlayerMovement : MonoBehaviour
 
         if (isBig == true && playerScale < 1)
         {
-            playerScale += 0.05f;
+            playerScale += (1f*Time.deltaTime);
 
             
         }
         if (isBig == false && playerScale > 0.4)
         {
-            playerScale -= 0.05f;
+            playerScale -= (1f * Time.deltaTime);
 
         }
         transform.localScale = new Vector3(playerScale, playerScale, playerScale);

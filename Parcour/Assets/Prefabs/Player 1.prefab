@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 6963991157298244280}
   - component: {fileID: 7849638394990922644}
   - component: {fileID: 4347892719729692860}
+  - component: {fileID: 1696304235}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -83,6 +84,21 @@ AudioListener:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6735001303701952216}
   m_Enabled: 1
+--- !u!114 &1696304235
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6735001303701952216}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c00426c72ff3751469f4af9a582358b3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  sensY: 10
+  sensX: 10
+  body: {fileID: 3481460004121492389}
 --- !u!1 &7044106943133333878
 GameObject:
   m_ObjectHideFlags: 0
@@ -97,7 +113,7 @@ GameObject:
   - component: {fileID: 1914854840063035976}
   m_Layer: 0
   m_Name: Capsule
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -173,10 +189,10 @@ CapsuleCollider:
   m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_Enabled: 1
-  m_Radius: 0.5
-  m_Height: 2
+  m_Radius: 0.61
+  m_Height: 1.97
   m_Direction: 1
-  m_Center: {x: 0, y: 0, z: 0}
+  m_Center: {x: 0, y: 0.28, z: 0}
 --- !u!1 &7913397850949153099
 GameObject:
   m_ObjectHideFlags: 0
@@ -190,7 +206,7 @@ GameObject:
   - component: {fileID: 4225068646841964654}
   m_Layer: 0
   m_Name: Player 1
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -223,10 +239,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8a01a93e190db6d4ab6f6f487c3ba01a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moveSpeed: 0
-  jumpForce: 0
-  controller: {fileID: 0}
-  gravityScale: 0
+  moveSpeed: 30
+  rigidbody: {fileID: 4225068646841964654}
+  isGrounded: 0
+  isBig: 0
+  jump: {x: 0, y: 0, z: 0}
+  jumpForce: 200
 --- !u!54 &4225068646841964654
 Rigidbody:
   m_ObjectHideFlags: 0
