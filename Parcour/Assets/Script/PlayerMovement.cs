@@ -5,14 +5,14 @@ using UnityEngine;
 
 public class PlayerMovement : MonoBehaviour
 {
-    public float moveSpeed;
+    float moveSpeed;
     public Rigidbody rigidbody;
-    public bool isGrounded;
+    bool isGrounded;
     float disstanceToTheGround;
-    public bool isBig;
+    bool isBig;
     float playerScale = 1;
     Vector3 temp;
-    public Vector3 jump;
+    Vector3 jump;
     public float jumpForce = 2.0f;
     bool moonjump;
     bool moonjump2;
